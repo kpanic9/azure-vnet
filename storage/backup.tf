@@ -9,8 +9,8 @@ resource "azurerm_recovery_services_vault" "this" {
 # VM backup policy
 resource "azurerm_backup_policy_vm" "this" {
   name                = "${var.name}-vm-backup-policy"
-  location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
+  recovery_vault_name = azurerm_recovery_services_vault.this.name
 
   timezone = "UTC"
 
@@ -20,6 +20,6 @@ resource "azurerm_backup_policy_vm" "this" {
   }
 
   retention_daily {
-    count = 5
+    count = 3
   }
 }

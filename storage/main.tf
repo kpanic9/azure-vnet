@@ -3,7 +3,7 @@ data "azurerm_resource_group" "this" {
 }
 
 resource "azurerm_storage_account" "this" {
-  name                     = "${var.name}-storage-account"
+  name                     = "${var.name}storageaccount"
   resource_group_name      = data.azurerm_resource_group.this.name
   location                 = data.azurerm_resource_group.this.location
   account_tier             = "Standard"
