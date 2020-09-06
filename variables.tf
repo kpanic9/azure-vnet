@@ -7,3 +7,5 @@ variable "region" {
   description = "Azure region"
   type        = string
 }
+
+variable "admin_password" {}

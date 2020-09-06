@@ -35,3 +35,13 @@ module "file_share" {
   storage_account_name = module.storage.storage_account_name
 }
 
+# deploy a vm
+module "app_vm" {
+  source              = "./vm"
+  name                = "app"
+  resource_group_name = azurerm_resource_group.this.name
+  instance_type       = "Standard_B1ls"
+  subnet_id = module.vnet.subnets["public-1"]
+  admin_user          = "appadmin"
+  admin_password      = var.admin_password
+}
