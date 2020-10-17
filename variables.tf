@@ -9,3 +9,6 @@ variable "region" {
 }
 
 variable "admin_password" {}
+variable "app_vm_nsg_rules" {}
+
+

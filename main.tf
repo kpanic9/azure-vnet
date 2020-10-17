@@ -41,7 +41,10 @@ module "app_vm" {
   name                = "app"
   resource_group_name = azurerm_resource_group.this.name
   instance_type       = "Standard_B1ls"
-  subnet_id = module.vnet.subnets["public-1"]
+  subnet_id           = module.vnet.subnets["public-1"]
   admin_user          = "appadmin"
   admin_password      = var.admin_password
+  nsg_rules           = var.app_vm_nsg_rules
 }
+
+
