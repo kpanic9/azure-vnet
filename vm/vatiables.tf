@@ -27,3 +27,9 @@ variable "admin_password" {
   description = "Administrator password"
   type        = string
 }
+
+variable "nsg_rules" {
+  description = "Map of nsg rules"
+  type        = map
+  default     = {}
+}
