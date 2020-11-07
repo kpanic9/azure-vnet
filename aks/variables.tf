@@ -38,6 +38,17 @@ variable "pod_cni" {
   }
 }
 
+variable "network_policy" {
+  description = "AKS cluster pod network policy"
+  type        = string
+  default     = "none"
+
+  validation {
+    condition     = var.network_policy == "calico" || var.network_policy == "azure" || var.network_policy == "none"
+    error_message = "Network policy can only be one of calico, azure or none."
+  }
+}
+
 variable "subnet_id" {
   description = "Azure subnet id to create the AKS cluster"
   type        = string
@@ -63,3 +74,8 @@ variable "docker_bridge_cidr" {
   default     = "192.168.1.1/24"
 }
 
+variable "whitelist_ips" {
+  description = "List public IPs to be whitelisted for AKS API server access"
+  type        = list(string)
+  default     = []
+}

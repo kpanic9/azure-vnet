@@ -9,7 +9,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix          = "${var.name}-aks"
 
   # TODO: Secure API server
-  private_cluster_enabled = false
+  private_cluster_enabled         = false
+  api_server_authorized_ip_ranges = var.whitelist_ips
 
   default_node_pool {
     name           = "${var.name}default"
@@ -25,10 +26,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   dynamic "network_profile" {
     for_each = var.pod_cni == "azure" ? { config = true } : {}
     content {
-      network_plugin    = "azure"
-      load_balancer_sku = "standard"
-      outbound_type     = "userDefinedRouting"
-
+      network_plugin     = "azure"
+      load_balancer_sku  = "standard"
+      outbound_type      = "userDefinedRouting"
+      network_policy     = var.network_policy
       service_cidr       = var.service_cidr
       dns_service_ip     = var.kube_dns_ip
       docker_bridge_cidr = var.docker_bridge_cidr
