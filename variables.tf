@@ -11,4 +11,7 @@ variable "region" {
 variable "admin_password" {}
 variable "app_vm_nsg_rules" {}
 
-
+variable "whitelist_ips" {
+  description = "Public IP address of user"
+  type        = list(string)
+}
